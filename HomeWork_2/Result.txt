@@ -1,0 +1,2 @@
+1. Lines 1, 6 and 11 were added to the Zapovit.txt
+2. Branch "DmytroGerasymenko" were added
