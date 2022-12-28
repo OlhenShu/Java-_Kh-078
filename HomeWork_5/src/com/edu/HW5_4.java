@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class HW5_4 {
     public static void main(String[] args) {
         Car[] cars = new Car[4];
-        int productionYear;
 
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < cars.length; i++) {
@@ -22,26 +21,12 @@ public class HW5_4 {
 
         System.out.println("**********");
         System.out.print("Enter the year of production: ");
-        productionYear = sc.nextInt();
-        System.out.println("See below all cars with the entered year of production:");
-        for (Car car : cars) {
-            if (productionYear == car.getProductionYear()) { System.out.println(car); }
-        }
+        int productionYear = sc.nextInt();
+        if (Car.isCarExists(cars, productionYear)) { Car.displayCars(cars, productionYear); }
+        else { System.out.println("There are no exist any cars with the entered year of production"); }
 
-        Car temp;
-        for (int i = 0; i < cars.length - 1; i++) {
-            for (int j = i + 1; j < cars.length; j++) {
-                if (cars[i].getProductionYear() > cars[j].getProductionYear()) {
-                    temp = cars[i];
-                    cars[i] = cars[j];
-                    cars[j] = temp;
-                }
-            }
-        }
         System.out.println("**********");
         System.out.println("See below the list of cars sorted by production year:");
-        for (Car car : cars) {
-            System.out.println(car);
-        }
+        Car.displayCars(Car.sortCarsByYear(cars));
     }
 }

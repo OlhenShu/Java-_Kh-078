@@ -5,29 +5,37 @@ import java.util.Scanner;
 public class HW5_2 {
     public static void main(String[] args) {
         int[] arrayOfNumbers = new int[10];
-        int sum = 0;
-        int multiplication = 1;
-        boolean checkPositiveNumber = true;
 
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < arrayOfNumbers.length; i++) {
             System.out.printf("Enter the %d number: ", i + 1);
             arrayOfNumbers[i] = sc.nextInt();
-            if (i < 5 && arrayOfNumbers[i] <= 0) { checkPositiveNumber = false; }
         }
 
-        if (checkPositiveNumber) {
-            for (int i = 0; i < arrayOfNumbers.length / 2; i++) {
-                sum += arrayOfNumbers[i];
-            }
-            System.out.println("**********");
-            System.out.printf("The sum of first %d elements is %d", arrayOfNumbers.length / 2, sum);
+        System.out.println("**********");
+        if (checkIfFirst5ElementsArePositive(arrayOfNumbers)) {
+            System.out.printf("The sum of first 5 elements is %d", sumOfFirst5Elements(arrayOfNumbers));
         } else {
-            for (int i = arrayOfNumbers.length - 1; i >= arrayOfNumbers.length / 2; i--) {
-                multiplication *= arrayOfNumbers[i];
-            }
-            System.out.println("**********");
-            System.out.printf("The multiplication of last %d elements is %d", arrayOfNumbers.length / 2, multiplication);
+            System.out.printf("The multiplication of last 5 elements is %d", multOfLast5Elements(arrayOfNumbers));
         }
+    }
+
+    public static boolean checkIfFirst5ElementsArePositive (int[] array) {
+        for (int i = 0; i < array.length / 2; i++) {
+            if (array[i] <= 0) { return false; }
+        }
+        return true;
+    }
+
+    public static int sumOfFirst5Elements (int[] array) {
+        int result = 0;
+        for (int i = 0; i < array.length / 2; i++) { result += array[i]; }
+        return result;
+    }
+
+    public static int multOfLast5Elements (int[] array) {
+        int result = 1;
+        for (int i = array.length - 1; i >= array.length / 2; i--) { result *= array[i]; }
+        return result;
     }
 }

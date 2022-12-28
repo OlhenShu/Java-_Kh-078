@@ -12,36 +12,55 @@ public class HW5_3 {
             array[i] = sc.nextInt();
         }
 
-        int secondPositiveElementIndex = 0;
+        System.out.println("**********");
+        switch (quantityPositiveElements(array)) {
+            case 0 -> System.out.println("You haven't entered any positive number");
+            case 1 -> System.out.println("You have entered only one positive number");
+            default -> System.out.printf("The position of the 2nd positive number is %d (index %d)\n",
+                    indexOf2ndPositiveElement(array) + 1, indexOf2ndPositiveElement(array));
+        }
+        System.out.printf("The min element is %d at position %d (index %d)\n",
+                array[indexOfMinElement(array)], indexOfMinElement(array) + 1, indexOfMinElement(array));
+        if (multOfEvenElements(array) == 1) {
+            System.out.println("You haven't entered any even number");
+        } else {
+            System.out.printf("The multiplication of all entered even numbers is %d\n", multOfEvenElements(array));
+        }
+    }
+
+    public static int quantityPositiveElements (int[] array) {
+        int result = 0;
+        for (int element : array) {
+            if (element > 0) { result++; }
+        }
+        return result;
+    }
+
+    public static int indexOf2ndPositiveElement (int[] array) {
+        int result = -1;
         int counterPositiveElements = 0;
-        int minElement = array[0];
-        int minElementIndex = 0;
-        int multiplication = 1;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > 0) {
                 counterPositiveElements ++;
-                if (counterPositiveElements == 2) { secondPositiveElementIndex = i; }
+                if (counterPositiveElements == 2) { result = i; }
             }
-            if (minElement > array[i]) {
-                minElement = array[i];
-                minElementIndex = i;
-            }
-            if (array[i] % 2 == 0) { multiplication *= array[i]; }
         }
+        return result;
+    }
 
-        System.out.println("**********");
-        switch (counterPositiveElements) {
-            case 0 -> System.out.println("You haven't entered any positive number");
-            case 1 -> System.out.println("You haven entered only one positive number");
-            default -> System.out.printf("The position of the 2nd positive number is %d (index %d)\n",
-                    secondPositiveElementIndex + 1, secondPositiveElementIndex);
+    public static int indexOfMinElement (int[] array) {
+        int result = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[result] > array[i]) { result = i; }
         }
-        System.out.printf("The min element is %d at position %d (index %d)\n",
-                minElement, minElementIndex + 1, minElementIndex);
-        if (multiplication == 1) {
-            System.out.println("You haven't entered any even number");
-        } else {
-            System.out.printf("The multiplication of all entered even numbers is %d\n", multiplication);
+        return result;
+    }
+
+    public static int multOfEvenElements (int[] array) {
+        int result = 1;
+        for (int element : array) {
+            if (element % 2 == 0) { result *= element; }
         }
+        return result;
     }
 }
